@@ -19,8 +19,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Set up Android SDK
-      uses: android-actions/setup-android@v3
+    - name: Accept Android SDK Licenses
+      run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
     - name: Make gradlew executable
       working-directory: "BGMI 4.6 X64 @JOIN_ALL_SRC/BGMI 4.6 X64 @JOIN_ALL_SRC"
