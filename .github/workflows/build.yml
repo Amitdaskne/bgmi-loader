@@ -1,0 +1,37 @@
+name: Build BGMI Loader APK
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Make gradlew executable
+      working-directory: "BGMI 4.6 X64 @JOIN_ALL_SRC/BGMI 4.6 X64 @JOIN_ALL_SRC"
+      run: chmod +x gradlew
+
+    - name: Build Debug APK
+      working-directory: "BGMI 4.6 X64 @JOIN_ALL_SRC/BGMI 4.6 X64 @JOIN_ALL_SRC"
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-debug
+        path: "BGMI 4.6 X64 @JOIN_ALL_SRC/BGMI 4.6 X64 @JOIN_ALL_SRC/app/build/outputs/apk/debug/*.apk"
