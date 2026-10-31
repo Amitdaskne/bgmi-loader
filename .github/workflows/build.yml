@@ -26,9 +26,9 @@ jobs:
       working-directory: "BGMI 4.6 X64 @JOIN_ALL_SRC/BGMI 4.6 X64 @JOIN_ALL_SRC"
       run: chmod +x gradlew
 
-    - name: Build Debug APK
+    - name: Build Debug APK (NDK Disabled)
       working-directory: "BGMI 4.6 X64 @JOIN_ALL_SRC/BGMI 4.6 X64 @JOIN_ALL_SRC"
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug -Pandroid.useDeprecatedNdk=true
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
